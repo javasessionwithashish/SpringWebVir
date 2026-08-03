@@ -34,5 +34,10 @@ return "loginPage";
     return "loginPage";
 }
 
+@PostMapping("/login")
+    public String loginPost()
+{
+    return "home";
+}
 
 }
