@@ -1,12 +1,20 @@
 package io.virinchi.springweb.Controller;
 
+import io.virinchi.springweb.Model.UserTbl;
+import io.virinchi.springweb.Repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SignupLoginController {
+
+
+@Autowired
+   private  UserRepository uRepo ;
+
 
     @GetMapping("/signup")
 public String signup()
@@ -28,8 +36,11 @@ return "loginPage";
  String username=   request.getParameter("username");
    String password= request.getParameter("password");
 
-    System.out.println(username);
-    System.out.println(password);
+UserTbl user = new UserTbl();
+user.setUsername(username);
+user.setPassword(password);
+
+uRepo.save(user);
 
     return "loginPage";
 }
