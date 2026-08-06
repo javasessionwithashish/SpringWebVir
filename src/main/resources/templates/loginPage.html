@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>This is a login page.</h1>
-
+<span style="color: red"  th:text="${error}"></span>
 <form method="post" action="login">
     Username: <input type="text" name="username"><br><br>
     Password: <input type="password" name="password"><br><br>

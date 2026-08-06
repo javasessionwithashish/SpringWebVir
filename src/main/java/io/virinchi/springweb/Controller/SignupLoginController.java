@@ -5,6 +5,7 @@ import io.virinchi.springweb.Repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,7 +54,7 @@ uRepo.save(user);
 }
 
 @PostMapping("/login")
-    public String loginPost(HttpServletRequest request)
+    public String loginPost(HttpServletRequest request, Model m)
 {
     String username= request.getParameter("username");
     String password = request.getParameter("password");
@@ -64,7 +65,11 @@ uRepo.save(user);
    {
 return "home";
    }
-
+//message pathauna kunai page ma hamlai MODEL chainchha
+    //Controller bata html page ma model le msg transfer garchha
+    //MODEL ma attribute rakhera pathauchhau
+//m.addAttribute("title","msg")
+    m.addAttribute("error", "Username or password is incorrect");
     return "loginPage";
 }
 
