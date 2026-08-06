@@ -5,8 +5,11 @@ import io.virinchi.springweb.Repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Base64;
 
 @Controller
 public class SignupLoginController {
@@ -36,9 +39,13 @@ return "loginPage";
  String username=   request.getParameter("username");
    String password= request.getParameter("password");
 
+   String hashPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+   //md5 algorithm, this is basic algorithm, anyone can hack this
+    //we will learn bcrypt technique very soon
+
 UserTbl user = new UserTbl();
 user.setUsername(username);
-user.setPassword(password);
+user.setPassword(hashPassword);
 
 uRepo.save(user);
 
@@ -46,9 +53,19 @@ uRepo.save(user);
 }
 
 @PostMapping("/login")
-    public String loginPost()
+    public String loginPost(HttpServletRequest request)
 {
-    return "home";
+    String username= request.getParameter("username");
+    String password = request.getParameter("password");
+
+    String hashPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+
+   if( uRepo.existsByUsernameAndPassword(username,hashPassword))
+   {
+return "home";
+   }
+
+    return "loginPage";
 }
 
 }

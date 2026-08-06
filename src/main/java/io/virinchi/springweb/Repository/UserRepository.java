@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 //2. CRUD Operations needs to be extended by REPOSITORY
 @Repository
 public interface UserRepository extends JpaRepository<UserTbl, Integer> {
+//Custom function however, notice that existsBy function is provided by repo itself
+
+boolean existsByUsernameAndPassword(String username, String password);
+
 }
