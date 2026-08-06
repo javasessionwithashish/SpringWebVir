@@ -3,6 +3,7 @@ package io.virinchi.springweb.Controller;
 import io.virinchi.springweb.Model.UserTbl;
 import io.virinchi.springweb.Repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,6 +64,14 @@ uRepo.save(user);
 
    if( uRepo.existsByUsernameAndPassword(username,hashPassword))
    {
+       HttpSession session= request.getSession();
+       //request bhaneko http ko request ho
+       //session http ma banaune
+
+session.setAttribute("username",username);
+//yedi userko password ra username mileko chha bhane usko
+       //session ma euta attribute janchha
+       //session janchha until user logs out
 return "home";
    }
 //message pathauna kunai page ma hamlai MODEL chainchha
