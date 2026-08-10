@@ -22,6 +22,7 @@
         <div class="col-right">
             <div class="login-form">
                 <h2>Login</h2>
+                <span style="color:green" th:text="${message}"></span>
                 <span style="color: red"  th:text="${error}"></span>
                 <form action="login" method="post">
                     <p> <label>Username/Email address<span>*</span></label> <input type="text" placeholder="Username or Email" name="username" required> </p>

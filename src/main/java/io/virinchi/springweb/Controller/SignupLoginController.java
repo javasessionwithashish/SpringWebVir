@@ -82,4 +82,15 @@ return "home";
     return "loginPage";
 }
 
+@GetMapping("/logout")
+public String logoutGet(HttpSession session, Model m)
+{
+
+    session.invalidate();
+
+    m.addAttribute("message","You have logged out!");
+return "loginPage";
+}
+
+
 }
