@@ -73,7 +73,7 @@ session.setAttribute("username",username);
        //session ma euta attribute janchha
        //session janchha until user logs out
 
-      session.setAttribute("totalUsers",uRepo.findAll());
+      m.addAttribute("totalUsers",uRepo.findAll());
 return "home";
    }
 //message pathauna kunai page ma hamlai MODEL chainchha
