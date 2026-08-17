@@ -1,5 +1,6 @@
 package io.virinchi.springweb.Controller;
 
+import io.virinchi.springweb.Model.UserTbl;
 import io.virinchi.springweb.Repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,18 @@ public class UserController {
 
     m.addAttribute("totalUsers",uRepo.findAll());
     return "home";
+}
+
+
+@PostMapping("/editUser")
+    public String editUser(@RequestParam("id") int id ,Model m )
+{
+    UserTbl user = uRepo.getById(id);
+// user ko information -> id, username, password
+    //user.getId()......etc
+
+m.addAttribute("user",user);
+    return "editPage";
 }
 
 }
