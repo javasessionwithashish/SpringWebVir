@@ -9,10 +9,10 @@
 
 <h4>Edit the following user:</h4>
 
-<form>
-Id: <input type="text" th:value="${user.getId()}" readonly><br><br>
-    Username: <input type="text" th:value="${user.getUsername()}"><br><br>
-     <input type="hidden" th:value="${user.getPassword()}"> <br><br>
+<form method="post" action="updateUser">
+Id: <input type="text" th:value="${user.getId()}" name="id" readonly><br><br>
+    Username: <input type="text" th:value="${user.getUsername()}" name="username"><br><br>
+     <input type="hidden" th:value="${user.getPassword()}" name="password"> <br><br>
 
     <input type="submit" value ="Update This User">
 
