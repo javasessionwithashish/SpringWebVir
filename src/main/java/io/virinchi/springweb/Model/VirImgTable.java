@@ -3,12 +3,13 @@ package io.virinchi.springweb.Model;
 import jakarta.persistence.*;
 
 @Entity
-public class ImgTable {
+public class VirImgTable {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private int id;
 
 @Lob
+@Column(columnDefinition = "MEDIUMBLOB")
 private String image;
 
 //BLOB is used for image management
