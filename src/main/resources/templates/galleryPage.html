@@ -11,7 +11,15 @@
 <h4> Upload a Photo: </h4>
 <form method="post" action="galleryPost" enctype="multipart/form-data">
 <input type="file" name="image">
+    <input type="submit" value="Upload">
 </form>
+<h2>Images Uploaded:</h2>
+
+<span th:each="image:${totalImages}">
+
+    <img th:src=" 'data:image/jpeg;base64,'  + ${image.getImage()}">
+
+</span>
 
 </body>
 </html>

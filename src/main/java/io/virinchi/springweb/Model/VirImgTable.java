@@ -1,8 +1,10 @@
 package io.virinchi.springweb.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class VirImgTable {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
