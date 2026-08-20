@@ -4,7 +4,10 @@ import io.virinchi.springweb.Model.UserTbl;
 import io.virinchi.springweb.Repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
@@ -14,11 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Base64;
 
 @Controller
+@RequiredArgsConstructor //autowired
 public class SignupLoginController {
 
+private final JavaMailSender jms;
 
-@Autowired
-   private  UserRepository uRepo ;
+private  final UserRepository uRepo ;
 
 
     @GetMapping("/signup")
@@ -40,6 +44,7 @@ return "loginPage";
     //request.getParameter("username") name?->Intellij ->form name
  String username=   request.getParameter("username");
    String password= request.getParameter("password");
+   String email= request.getParameter("email");
 
    String hashPassword = DigestUtils.md5DigestAsHex(password.getBytes());
    //md5 algorithm, this is basic algorithm, anyone can hack this
@@ -50,6 +55,15 @@ user.setUsername(username);
 user.setPassword(hashPassword);
 
 uRepo.save(user);
+
+//Mail Sender
+    SimpleMailMessage message = new SimpleMailMessage();
+    message.setTo(email);
+    message.setSubject("Signup Successful");
+
+    message.setText("Congratulations! you have successfuly signed up!!! WELCOME: "+username);
+
+    jms.send(message);
 
     return "loginPage";
 }
